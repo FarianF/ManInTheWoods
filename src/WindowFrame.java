@@ -15,7 +15,6 @@ public class WindowFrame extends JFrame implements Runnable {
         this.setSize(frameWidth, frameHeight);
         this.setLocation(600, 100);
         this.setVisible(true);
-        this.setBackground(Color.BLACK);
         startThread();
     }
 
