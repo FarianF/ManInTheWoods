@@ -1,5 +1,5 @@
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -11,11 +11,14 @@ public class DrawPanel extends JPanel {
 
     protected void paintComponent(Graphics g){
         try{
-            background = ImageIO.read(new File(".idea/Forests/TitleScreen.gif"));
+            background = ImageIO.read(new File("Forests/Forest2.jpg"));
             } catch (IOException e){
             background = null;
         }
+        ImageIcon icon = new ImageIcon("Forests/Forest2.jpg");
+        JLabel thumb = new JLabel();
+        thumb.setIcon(icon);
         super.paintComponent(g);
-        g.drawImage(background, 0, 0, null);
+        g.drawImage(icon.getImage(), 0, 0, null);
         }
     }

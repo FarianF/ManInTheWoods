@@ -7,8 +7,8 @@ public class WindowFrame extends JFrame implements Runnable {
 
     public WindowFrame(String display) {
         super(display);
-        int frameWidth = 500;
-        int frameHeight = 500;
+        int frameWidth = 563;
+        int frameHeight = 360;
         p = new DrawPanel();
         this.add(p);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
