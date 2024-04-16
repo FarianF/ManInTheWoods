@@ -19,10 +19,6 @@ public class DrawPanel1 extends JPanel implements MouseListener {
 
     }
 
-    public DrawPanel1(String newGame){
-        this.addMouseListener(this);
-    }
-
     protected void paintComponent(Graphics g){
         try{
             background = ImageIO.read(new File("Forests/Forest2.jpg"));

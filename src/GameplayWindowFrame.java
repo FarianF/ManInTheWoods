@@ -9,16 +9,15 @@ public class GameplayWindowFrame extends JFrame implements Runnable {
 
     public GameplayWindowFrame(String display) {
         super(display);
-        int frameWidth = 563;
-        int frameHeight = 360;
+        int frameWidth = 800;
+        int frameHeight = 800;
         p = new DrawGameplayPanel();
         this.add(p);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(frameWidth, frameHeight);
         this.setLocation(600, 100);
-        this.setBackground(Color.BLACK);
         this.setVisible(true);
-        this.dispatchEvent(new WindowEvent(x, WindowEvent.WINDOW_CLOSING));
+        this.setBackground(Color.BLACK);
         startThread();
     }
 

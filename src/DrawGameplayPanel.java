@@ -17,6 +17,8 @@ public class DrawGameplayPanel extends JPanel implements MouseListener {
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        this.setOpaque(true);
+        this.setBackground(Color.BLACK);
 
     }
 

@@ -1,4 +1,6 @@
 import javax.swing.JFrame;
+import java.awt.*;
+import java.awt.event.WindowEvent;
 
 public class WindowFrame extends JFrame implements Runnable {
     private DrawPanel1 p;
@@ -15,8 +17,10 @@ public class WindowFrame extends JFrame implements Runnable {
         this.setSize(frameWidth, frameHeight);
         this.setLocation(600, 100);
         this.setVisible(true);
+
         startThread();
     }
+
 
 
         public void startThread () {
@@ -26,7 +30,7 @@ public class WindowFrame extends JFrame implements Runnable {
 
         public void run () {
             while (true) {
-                p.repaint();
+
             }
         }
     }
