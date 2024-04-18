@@ -1,11 +1,15 @@
 import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class GameplayWindowFrame extends JFrame implements Runnable {
     private DrawGameplayPanel p;
     private WindowFrame x;
     private Thread windowThread;
+    private WorldReader test =  new WorldReader();
+
+    private ArrayList<String> world = new ArrayList<>();
 
     public GameplayWindowFrame(String display) {
         super(display);
@@ -19,6 +23,10 @@ public class GameplayWindowFrame extends JFrame implements Runnable {
         this.setVisible(true);
         this.setBackground(Color.BLACK);
         startThread();
+        world = test.generateWorld();
+        for(int r = 0; r < test.getWorlds().size(); r++){
+            for(int c = 0; c<test.getWorlds())
+        }
     }
 
     public void startThread () {

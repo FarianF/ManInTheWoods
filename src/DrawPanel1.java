@@ -44,7 +44,7 @@ public class DrawPanel1 extends JPanel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         Point clicked = e.getPoint();
 
-        if(e.getButton()== 1 ){
+        if(e.getButton() == 1 ){
             if(button.contains(clicked) || loadButton.contains(clicked)){
                 game = new GameplayWindowFrame("Test2");
             }
