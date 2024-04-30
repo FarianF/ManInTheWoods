@@ -11,9 +11,12 @@ public class DrawPanel1 extends JPanel implements MouseListener {
     private GameplayWindowFrame game;
     private Rectangle loadButton;
     private Image background;
+    private JFrame frame1;
 
-    public DrawPanel1(){
+
+    public DrawPanel1(JFrame frame1){
         this.addMouseListener(this);
+        this.frame1 = frame1;
         button = new Rectangle(180, 50, 200, 35);
         loadButton = new Rectangle(180, 150, 200, 35);
 
@@ -47,6 +50,7 @@ public class DrawPanel1 extends JPanel implements MouseListener {
         if(e.getButton() == 1 ){
             if(button.contains(clicked) || loadButton.contains(clicked)){
                 game = new GameplayWindowFrame("Test2");
+                frame1.dispose();
             }
         }
 
