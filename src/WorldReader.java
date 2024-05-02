@@ -4,9 +4,27 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class WorldReader {
     private ArrayList<String> data = new ArrayList<>();
-    public int[][] generateWorld(){
+    private SpriteLoader[][] gameMap;
+
+    public WorldReader(){
+        generateWorld();
+    }
+
+
+    private void generateWorld(){
+        int[][] worldData = getWorld("Worlds/Forest1");
+
+        gameMap = new SpriteLoader[8][23];
+        for(int r = 0; r < gameMap.length; r++ ){
+            for(int c = 0; c < gameMap[0].length; c++){
+                SpriteLoader t = new SpriteLoader(worldData[r][c], r, c);
+                gameMap[r][c] = t;
+            }
+        }
+    }
+    public int[][] getWorld(String fileName){
         try{
-            File myObj = new File("Worlds/Forest1");
+            File myObj = new File(fileName);
             Scanner s = new Scanner(myObj);
             while(s.hasNextLine()){
                 data.add(s.nextLine());
@@ -14,6 +32,7 @@ public class WorldReader {
         } catch(FileNotFoundException e){
             System.exit(1);
         }
+        gameMap = new SpriteLoader[8][24];
 
         int r = data.size();
         int c = data.get(0).length();
@@ -35,5 +54,9 @@ public class WorldReader {
 
     public ArrayList<String> getData(){
         return data;
+    }
+
+    public SpriteLoader[][] getGameMap(){
+        return gameMap;
     }
 }

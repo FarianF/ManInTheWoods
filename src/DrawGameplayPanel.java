@@ -25,9 +25,8 @@ public class DrawGameplayPanel extends JPanel implements MouseListener {
 
 
     protected void paintComponent(Graphics g) {
-        int[][] blah = test.generateWorld();
-        int x = 0;
-        int y = 0;
+        int x = 10;
+        int y = 10;
         super.paintComponent(g);
         try{
             image = ImageIO.read(new File("Sprites/Gas (1).png"));
@@ -35,12 +34,10 @@ public class DrawGameplayPanel extends JPanel implements MouseListener {
             image = null;
         }
         ImageIcon icon = new ImageIcon("Sprites/Gas (1).png");
-        for(int r = 0; r < blah.length; r++){
-            for(int c = 0; c < blah[0].length; c++){
-                if(blah[r][c] == 1){
-                    g.drawImage(icon.getImage(), x, y, null);
-                    x += 20;
-                }
+        for(int r = 0; r < test.getGameMap().length; r++){
+            for(int c = 0; c < test.getGameMap()[0].length; c++){
+                SpriteLoader sprite = test.getGameMap()[r][c];
+                g.drawImage(sprite.getImage(), x, y, null);
             }
         }
         this.setOpaque(true);
