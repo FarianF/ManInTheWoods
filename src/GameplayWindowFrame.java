@@ -13,8 +13,8 @@ public class GameplayWindowFrame extends JFrame implements Runnable {
 
     public GameplayWindowFrame(String display) {
         super(display);
-        int frameWidth = 800;
-        int frameHeight = 800;
+        int frameWidth = 900;
+        int frameHeight = 900;
         p = new DrawGameplayPanel();
         this.add(p);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

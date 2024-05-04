@@ -37,12 +37,13 @@ public class SpriteLoader {
         if(spriteType == 1){
             image = loadImage(tree1);
         }
-        if(spriteType == 0){
-            image = loadImage(gasCan);
-        }
     }
 
     public BufferedImage getImage(){
         return image;
+    }
+
+    public int getSpriteType(){
+        return spriteType;
     }
 }

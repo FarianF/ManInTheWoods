@@ -14,7 +14,7 @@ public class WorldReader {
     private void generateWorld(){
         int[][] worldData = getWorld("Worlds/Forest1");
 
-        gameMap = new SpriteLoader[8][23];
+        gameMap = new SpriteLoader[15][23];
         for(int r = 0; r < gameMap.length; r++ ){
             for(int c = 0; c < gameMap[0].length; c++){
                 SpriteLoader t = new SpriteLoader(worldData[r][c], r, c);
@@ -47,7 +47,12 @@ public class WorldReader {
                     worldGen[i][j] = 1;
                 }
                 if(pieceOfWorld.charAt(j) == '#'){
-                    worldGen[i][j] = 0;
+                    int change = (int)(Math.random()*10);
+                    if (change < 3) {
+                        worldGen[i][j] = 1;
+                    } else {
+                        worldGen[i][j] = 0;
+                    }
                 }
             }
         }
