@@ -37,10 +37,10 @@ public class DrawGameplayPanel extends JPanel implements MouseListener {
             for(int c = 0; c < test.getGameMap()[0].length; c++){
                 SpriteLoader sprite = test.getGameMap()[r][c];
                 g.drawImage(sprite.getImage(), x, y, null);
-                x += 30;
+                x += 32;
             }
             x = 10;
-            y += 35;
+            y += 45;
 
         }
         this.setOpaque(true);
