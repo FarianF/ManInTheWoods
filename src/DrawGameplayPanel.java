@@ -10,13 +10,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class DrawGameplayPanel extends JPanel implements MouseListener {
+public class DrawGameplayPanel extends JLayeredPane implements MouseListener {
     private BufferedImage image;
 
 
     private WorldReader test = new WorldReader();
 
-    private Image background;
 
 
     public DrawGameplayPanel() {
@@ -37,7 +36,9 @@ public class DrawGameplayPanel extends JPanel implements MouseListener {
             for(int c = 0; c < test.getGameMap()[0].length; c++){
                 SpriteLoader sprite = test.getGameMap()[r][c];
                 g.drawImage(sprite.getImage(), x, y, null);
-                x += 32;
+                if(sprite.getSpriteType() == 0){
+                }
+                x += 33;
             }
             x = 10;
             y += 45;

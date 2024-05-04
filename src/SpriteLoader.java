@@ -9,7 +9,6 @@ public class SpriteLoader {
 
     private final String gasCan = "Sprites/Gas (1).png";
 
-    private final String tree1 = "Sprites/TREE1.png";
 
     int r;
     int c;
@@ -35,9 +34,12 @@ public class SpriteLoader {
     public void setSpriteType(int spriteType) {
         this.spriteType = spriteType;
         if(spriteType == 1){
-            image = loadImage(tree1);
+            int treeType = (int) (Math.random()*2)+1;
+            image = loadImage("Sprites/TREE" + treeType + ".png");
         }
+
     }
+
 
     public BufferedImage getImage(){
         return image;
