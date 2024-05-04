@@ -23,16 +23,17 @@ public class WorldReader {
         }
     }
     public int[][] getWorld(String fileName){
+        File myObj = new File(fileName);
+        Scanner s = null;
         try{
-            File myObj = new File(fileName);
-            Scanner s = new Scanner(myObj);
+            s = new Scanner(myObj);
             while(s.hasNextLine()){
                 data.add(s.nextLine());
             }
         } catch(FileNotFoundException e){
             System.exit(1);
         }
-        gameMap = new SpriteLoader[8][24];
+
 
         int r = data.size();
         int c = data.get(0).length();
@@ -44,6 +45,9 @@ public class WorldReader {
             for(int j = 0; j < pieceOfWorld.length(); j++){
                 if(pieceOfWorld.charAt(j) == '.'){
                     worldGen[i][j] = 1;
+                }
+                if(pieceOfWorld.charAt(j) == '#'){
+                    worldGen[i][j] = 0;
                 }
             }
         }

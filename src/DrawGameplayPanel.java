@@ -33,12 +33,15 @@ public class DrawGameplayPanel extends JPanel implements MouseListener {
         } catch (IOException e){
             image = null;
         }
-        ImageIcon icon = new ImageIcon("Sprites/Gas (1).png");
         for(int r = 0; r < test.getGameMap().length; r++){
             for(int c = 0; c < test.getGameMap()[0].length; c++){
                 SpriteLoader sprite = test.getGameMap()[r][c];
                 g.drawImage(sprite.getImage(), x, y, null);
+                x += 30;
             }
+            x = 10;
+            y += 35;
+
         }
         this.setOpaque(true);
         this.setBackground(Color.BLACK);
