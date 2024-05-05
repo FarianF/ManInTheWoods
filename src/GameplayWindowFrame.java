@@ -7,14 +7,11 @@ import java.util.ArrayList;
 public class GameplayWindowFrame extends JFrame implements Runnable {
     private DrawGameplayPanel p;
     private Thread windowThread;
-    private WorldReader test =  new WorldReader();
-
-    private ArrayList<String> world = new ArrayList<>();
 
     public GameplayWindowFrame(String display) {
         super(display);
-        int frameWidth = 900;
-        int frameHeight = 900;
+        int frameWidth = 1000;
+        int frameHeight = 1000;
         p = new DrawGameplayPanel();
         this.add(p);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

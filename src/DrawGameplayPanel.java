@@ -10,11 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class DrawGameplayPanel extends JLayeredPane implements MouseListener {
-    private BufferedImage image;
-
-
-    private WorldReader test = new WorldReader();
+public class DrawGameplayPanel extends JPanel implements MouseListener {
+    private  WorldReader test = new WorldReader();
 
 
 
@@ -27,17 +24,10 @@ public class DrawGameplayPanel extends JLayeredPane implements MouseListener {
         int x = 10;
         int y = 10;
         super.paintComponent(g);
-        try{
-            image = ImageIO.read(new File("Sprites/Gas (1).png"));
-        } catch (IOException e){
-            image = null;
-        }
         for(int r = 0; r < test.getGameMap().length; r++){
             for(int c = 0; c < test.getGameMap()[0].length; c++){
                 SpriteLoader sprite = test.getGameMap()[r][c];
                 g.drawImage(sprite.getImage(), x, y, null);
-                if(sprite.getSpriteType() == 0){
-                }
                 x += 33;
             }
             x = 10;
