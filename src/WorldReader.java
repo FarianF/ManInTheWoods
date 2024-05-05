@@ -22,7 +22,7 @@ public class WorldReader {
     private void generateWorld(){
         int[][] worldData = getWorld();
 
-        gameMap = new SpriteLoader[fileLength][fileSize+2];
+        gameMap = new SpriteLoader[fileLength+1][fileSize+2];
         for(int r = 0; r < gameMap.length; r++ ){
             for(int c = 0; c < gameMap[0].length; c++){
                 SpriteLoader t = new SpriteLoader(worldData[r][c], r, c);
@@ -32,7 +32,7 @@ public class WorldReader {
     }
     public int[][] getWorld(){
         StringBuilder part1 = new StringBuilder();
-        fileLength = (int) (Math.random()*20)+10;
+        fileLength = (int) (Math.random()*6)+15;
         fileSize = (int) (Math.random()*20)+10;
         for(int i = 0; i < fileLength; i++){
             for(int j = 0; j< fileSize; j++) {
@@ -95,14 +95,11 @@ public class WorldReader {
         }
 
         int r = data.size();
-        System.out.println(r);
         int c = data.get(0).length();
-        System.out.println(c);
         int[][] worldGen = new int[r][c];
 
         for(int i = 0; i < data.size(); i++){
             String pieceOfWorld = data.get(i);
-            System.out.println(pieceOfWorld);
             for(int j = 0; j < pieceOfWorld.length(); j++){
                 if(pieceOfWorld.charAt(j) == '.'){
                     worldGen[i][j] = 1;
@@ -113,7 +110,6 @@ public class WorldReader {
             }
         }
 
-        System.out.println(Arrays.deepToString(worldGen));
         return worldGen;
     }
 
