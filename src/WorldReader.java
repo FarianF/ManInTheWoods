@@ -8,21 +8,39 @@ import java.util.Scanner;
 public class WorldReader {
     private ArrayList<String> data = new ArrayList<>();
     private SpriteLoader[][] gameMap;
-
+    private Player user;
     private int fileLength;
 
+
     private int fileSize;
+    private boolean startExists;
+
+
 
 
     public WorldReader(){
         generateWorld();
     }
 
+    public void movePlayer(String direction){
+        int currentPlayerRow = user.getRow();
+        int currentPlayerColumn = user.getCol();
+
+        if(direction.equals("N")){
+            if(currentPlayerRow > 0){
+                user.setRow(currentPlayerRow - 1);
+            }
+        }
+    }
+
+
+
 
     private void generateWorld(){
         int[][] worldData = getWorld();
 
-        gameMap = new SpriteLoader[fileLength+1][fileSize+2];
+
+        gameMap = new SpriteLoader[fileLength+2][fileSize+2];
         for(int r = 0; r < gameMap.length; r++ ){
             for(int c = 0; c < gameMap[0].length; c++){
                 SpriteLoader t = new SpriteLoader(worldData[r][c], r, c);
@@ -38,14 +56,22 @@ public class WorldReader {
             for(int j = 0; j< fileSize; j++) {
                 int rand = (int) (Math.random() * 10) + 1;
                 if (rand > 4) {
-                    part1.append("#");
+                    int random = (int) (Math.random()*2)+1;
+                    if(random == 1 && startExists == false){
+                        startExists = true;
+                        part1.append('S');
+                    } else {
+                        part1.append("#");
+                    }
                 } else {
                     part1.append(".");
                 }
             }
 
+
             part1.append("\n");
         }
+
 
         for(int k = 0; k<fileSize; k++){
             part1.append(".");
@@ -55,10 +81,12 @@ public class WorldReader {
             FileWriter test = new FileWriter("Worlds/Forest1");
             test.write(part2);
 
+
             test.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
 
         File test2 = new File("Worlds/Forest1");
         Scanner s = null;
@@ -75,7 +103,8 @@ public class WorldReader {
             l += ".";
         }
 
-        data.set(0,l);
+
+        data.add(0,l);
         data.set(data.size()-1, l);
         String ugly2 = "";
         for(int z = 1; z < data.size()-1; z++){
@@ -83,20 +112,32 @@ public class WorldReader {
             data.set(z, ugly2);
         }
 
+
         try {
             FileWriter testPt2 = new FileWriter("Worlds/FinalForest");
             for(String ugly : data){
                 testPt2.write(ugly+"\n");
             }
 
+
             testPt2.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+
+
+
+
+
+
+
+
+
         int r = data.size();
         int c = data.get(0).length();
         int[][] worldGen = new int[r][c];
+
 
         for(int i = 0; i < data.size(); i++){
             String pieceOfWorld = data.get(i);
@@ -107,17 +148,36 @@ public class WorldReader {
                 if(pieceOfWorld.charAt(j) == '#'){
                     worldGen[i][j] = 0;
                 }
+                if(pieceOfWorld.charAt(j) == 'S'){
+                    worldGen[i][j] = 2;
+                }
+                if(pieceOfWorld.charAt(j) == 'S'){
+                    this.user = new Player(i, j);
+                }
             }
         }
 
+
         return worldGen;
     }
+
+
+    public void playerMovement(String direction){
+        if(direction.equals("N")){
+
+
+        }
+    }
+
+
+
 
 
 
     public ArrayList<String> getData(){
         return data;
     }
+
 
     public SpriteLoader[][] getGameMap(){
         return gameMap;
