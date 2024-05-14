@@ -35,6 +35,9 @@ public class Player {
     public int getCol(){
         return col;
     }
+    public BufferedImage getImage(){
+        return image;
+    }
 
     public void setRow(int row){
         this.row = row;

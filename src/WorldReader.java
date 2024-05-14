@@ -22,16 +22,42 @@ public class WorldReader {
         generateWorld();
     }
 
+    public Player getUser(){
+        return user;
+    }
+
     public void movePlayer(String direction){
         int currentPlayerRow = user.getRow();
         int currentPlayerColumn = user.getCol();
 
         if(direction.equals("N")){
             if(currentPlayerRow > 0){
+                if(gameMap[currentPlayerColumn -1][currentPlayerColumn].getSpriteType() != 1)
                 user.setRow(currentPlayerRow - 1);
+                }
+            }
+        if(direction.equals("E")){
+            if(currentPlayerColumn < gameMap[0].length - 1){
+                if (gameMap[currentPlayerRow][currentPlayerColumn + 1].getSpriteType() != 1) {
+                    user.setCol(currentPlayerColumn + 1);
+                }
             }
         }
-    }
+        if(direction.equals("W")){
+            if(currentPlayerColumn > 0){
+                if(gameMap[currentPlayerRow][currentPlayerColumn - 1].getSpriteType() != 1){
+                    user.setCol(currentPlayerColumn - 1);
+                }
+            }
+        }
+        if(direction.equals("S")){
+            if(gameMap[currentPlayerRow + 1][currentPlayerColumn].getSpriteType() != 1){
+                user.setRow(currentPlayerRow + 1);
+            }
+        }
+
+        }
+
 
 
 
