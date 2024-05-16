@@ -81,7 +81,7 @@ public class WorldReader {
         for(int i = 0; i < fileLength; i++){
             for(int j = 0; j< fileSize; j++) {
                 int rand = (int) (Math.random() * 10) + 1;
-                if (rand > 4) {
+                if (rand < 8) {
                     int random = (int) (Math.random()*2)+1;
                     if(random == 1 && startExists == false){
                         startExists = true;

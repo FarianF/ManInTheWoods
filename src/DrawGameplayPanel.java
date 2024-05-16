@@ -19,6 +19,8 @@ public class DrawGameplayPanel extends JPanel implements MouseListener, KeyListe
 
     public DrawGameplayPanel() {
         this.addMouseListener(this);
+        this.addKeyListener(this);
+        this.setFocusable(true);
     }
 
 
@@ -90,16 +92,16 @@ public class DrawGameplayPanel extends JPanel implements MouseListener, KeyListe
     @Override
     public void keyTyped(KeyEvent e) {
         char c = e.getKeyChar();
-        if(c == 'W' || c == 'w'){
+        if(c == 'w'){
             test.movePlayer("N");
         }
-        if(c == 'S' || c == 's'){
+        if(c == 's'){
             test.movePlayer("S");
         }
-        if(c == 'A' || c == 'a'){
+        if(c == 'a'){
             test.movePlayer("W");
         }
-        if(c == 'D' || c == 'd'){
+        if(c == 'd'){
             test.movePlayer("E");
         }
     }

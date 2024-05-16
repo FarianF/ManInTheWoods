@@ -6,7 +6,7 @@ import java.awt.event.WindowListener;
 public class WindowFrame extends JFrame implements Runnable{
     private DrawPanel1 p;
     private Thread windowThread;
-    private WindowFrame x;
+
 
     public WindowFrame(String display) {
         super(display);
