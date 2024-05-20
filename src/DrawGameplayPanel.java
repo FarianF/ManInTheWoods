@@ -38,6 +38,7 @@ public class DrawGameplayPanel extends JPanel implements MouseListener, KeyListe
 
 
 
+
                 if(r == playerX && c == playerY){
                     g.drawImage(test.getUser().getImage(),x + 2, y + 2, null);
                 }

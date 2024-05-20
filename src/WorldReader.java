@@ -15,6 +15,8 @@ public class WorldReader {
     private int fileSize;
     private boolean startExists;
 
+    private boolean itemExists;
+
 
 
 
@@ -32,7 +34,7 @@ public class WorldReader {
 
         if(direction.equals("N")){
             if(currentPlayerRow > 0){
-                if(gameMap[currentPlayerColumn -1][currentPlayerColumn].getSpriteType() != 1)
+                if(gameMap[currentPlayerRow -1][currentPlayerColumn].getSpriteType() != 1)
                 user.setRow(currentPlayerRow - 1);
                 }
             }
@@ -78,16 +80,22 @@ public class WorldReader {
         StringBuilder part1 = new StringBuilder();
         fileLength = (int) (Math.random()*6)+15;
         fileSize = (int) (Math.random()*20)+10;
+        int count = 0;
         for(int i = 0; i < fileLength; i++){
             for(int j = 0; j< fileSize; j++) {
                 int rand = (int) (Math.random() * 10) + 1;
                 if (rand < 8) {
-                    int random = (int) (Math.random()*2)+1;
-                    if(random == 1 && startExists == false){
+                    int random = (int) (Math.random()*999)+1;
+                    if(random > 25 && startExists == false){
                         startExists = true;
                         part1.append('S');
+                    } else if(random < 25 && itemExists == false && count < 5){
+                        count++;
+                        System.out.println(count);
+                        part1.append('G');
+
                     } else {
-                        part1.append("#");
+                        part1.append('#');
                     }
                 } else {
                     part1.append(".");
@@ -138,6 +146,10 @@ public class WorldReader {
             data.set(z, ugly2);
         }
 
+        for(String levelPiece : data){
+            levelPiece.replace(levelPiece.charAt(3), 'G');
+                data.set(data.indexOf(levelPiece), levelPiece);
+            }
 
         try {
             FileWriter testPt2 = new FileWriter("Worlds/FinalForest");
@@ -176,6 +188,9 @@ public class WorldReader {
                 }
                 if(pieceOfWorld.charAt(j) == 'S'){
                     worldGen[i][j] = 2;
+                }
+                if(pieceOfWorld.charAt(j) == 'G'){
+                    worldGen[i][j] = 3;
                 }
                 if(pieceOfWorld.charAt(j) == 'S'){
                     this.user = new Player(i, j);

@@ -37,6 +37,9 @@ public class SpriteLoader {
             int treeType = (int) (Math.random()*2)+1;
             image = loadImage("Sprites/TREE" + treeType + ".png");
         }
+        if(spriteType == 3){
+            image = loadImage(gasCan);
+        }
 
 
     }
