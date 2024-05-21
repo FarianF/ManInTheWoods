@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -9,13 +10,10 @@ public class WorldReader {
     private ArrayList<String> data = new ArrayList<>();
     private SpriteLoader[][] gameMap;
     private Player user;
+    private GasCan[] items;
     private int fileLength;
-
-
     private int fileSize;
     private boolean startExists;
-
-    private boolean itemExists;
 
 
 
@@ -89,10 +87,11 @@ public class WorldReader {
                     if(random > 25 && startExists == false){
                         startExists = true;
                         part1.append('S');
-                    } else if(random < 25 && itemExists == false && count < 5){
+                    } else if(random < 25 && count < 5){
                         count++;
                         System.out.println(count);
                         part1.append('G');
+
 
                     } else {
                         part1.append('#');
@@ -202,16 +201,30 @@ public class WorldReader {
         return worldGen;
     }
 
-
-    public void playerMovement(String direction){
-        if(direction.equals("N")){
-
-
+    public void generateItems(){
+        items = new GasCan[5];
+        ArrayList<Point> itemPoint = new ArrayList<Point>();
+        for(int r = 0; r < gameMap.length; r++){
+            for(int c = 0; c < gameMap[0].length; c++){
+                if(gameMap[r][c].getSpriteType() == 0){
+                    itemPoint.add(new Point(r, c));
+                }
+            }
+        }
+        int itemCreated = 0;
+        while(itemCreated != 5){
+            int randomItemPoint = (int) (Math.random() * itemPoint.size());
+            Point itemPlacement = itemPoint.remove(randomItemPoint);
+            int row = (int)(itemPlacement.getX());
+            int col = (int)(itemPlacement.getY());
+            items[itemCreated] = new GasCan(row, col);
+            gameMap[row][col].setHasItem();
+            itemCreated++;
         }
     }
-
-
-
+    public GasCan[] getItems(){
+        return items;
+    }
 
 
 

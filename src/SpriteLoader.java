@@ -9,6 +9,8 @@ public class SpriteLoader {
 
     private final String gasCan = "Sprites/Gas (1).png";
 
+    private boolean hasItem;
+
 
     int r;
     int c;
@@ -17,6 +19,7 @@ public class SpriteLoader {
         this.setSpriteType(spriteType);
         this.r = r;
         this.c = c;
+        this.hasItem = false;
     }
 
 
@@ -37,9 +40,7 @@ public class SpriteLoader {
             int treeType = (int) (Math.random()*2)+1;
             image = loadImage("Sprites/TREE" + treeType + ".png");
         }
-        if(spriteType == 3){
-            image = loadImage(gasCan);
-        }
+
 
 
     }
@@ -51,5 +52,13 @@ public class SpriteLoader {
 
     public int getSpriteType(){
         return spriteType;
+    }
+
+    public boolean isHasItem() {
+        return hasItem;
+    }
+
+    public void setHasItem(){
+        this.hasItem = true;
     }
 }
