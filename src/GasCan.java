@@ -9,11 +9,14 @@ public class GasCan {
 
     private boolean isCollected;
 
+    private int itemSize;
+
     public GasCan(int row , int col){
         this.row = row;
         this.col = col;
         image = loadImage("Sprites/Gas (1).png");
         isCollected = false;
+        itemSize = (int) (Math.random()*15)+5;
     }
 
     public int getRow() {
@@ -51,5 +54,12 @@ public class GasCan {
 
     public boolean isCollected() {
         return isCollected;
+    }
+    public int getItemSize(){
+        return itemSize;
+    }
+
+    public void setItemSize(int itemSize) {
+        this.itemSize = itemSize;
     }
 }

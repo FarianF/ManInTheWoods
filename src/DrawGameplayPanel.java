@@ -41,7 +41,7 @@ public class DrawGameplayPanel extends JPanel implements MouseListener, KeyListe
 
 
                 if(r == playerX && c == playerY){
-                    g.drawImage(test.getUser().getImage(),x + 2, y + 2, null);
+                    g.drawImage(test.getUser().getImage(),x + 5, y + 2, null);
                 }
 
 
@@ -116,6 +116,12 @@ public class DrawGameplayPanel extends JPanel implements MouseListener, KeyListe
         }
         if(c == 'd'){
             test.movePlayer("E");
+        }
+        if(c == 'r'){
+            test.dropItem();
+        }
+        if(c == 'i'){
+            test.inventory();
         }
     }
 

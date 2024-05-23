@@ -56,16 +56,29 @@ public class  WorldReader {
             }
         }
         for(GasCan item : items){
-            if(user.getRow() == item.getRow() && user.getCol() == item.getCol()){
+            if(user.getRow() == item.getRow() && user.getCol() == item.getCol() && user.getPlayerInv() >= item.getItemSize() && gameMap[item.getRow()][item.getCol()].isHasItem() == true){
                 item.setCollected();
+                user.setPlayerInv(item.getItemSize());
+                user.addItemCollected(item.getItemSize());
                 gameMap[item.getRow()][item.getCol()].itemCollected();
-                System.out.println("Collected");
             }
         }
 
         }
 
+    public void dropItem(){
+        if((user.getItemsCollected().size() -1) > -1) {
+            user.setPlayerInv(-user.getItemsCollected().get(user.getItemsCollected().size() - 1));
+            user.setItemsCollected();
+        }
 
+        if(user.getItemsCollected() != null){gameMap[user.getRow()][user.getCol()].setHasItem();}
+
+    }
+
+    public void inventory(){
+        System.out.println(user.getItemsCollected());
+    }
 
 
 
