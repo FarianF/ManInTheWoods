@@ -4,16 +4,17 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 public class  WorldReader {
     private ArrayList<String> data = new ArrayList<>();
     private SpriteLoader[][] gameMap;
     private Player user;
-    private GasCan[] items;
+    private ArrayList<GasCan> items = new ArrayList<GasCan>();
     private int fileLength;
     private int fileSize;
     private boolean startExists;
+
+    private int itmAmt;
 
 
 
@@ -56,11 +57,12 @@ public class  WorldReader {
             }
         }
         for(GasCan item : items){
-            if(user.getRow() == item.getRow() && user.getCol() == item.getCol() && user.getPlayerInv() >= item.getItemSize() && gameMap[item.getRow()][item.getCol()].isHasItem() == true){
+            if(user.getRow() == item.getRow() && user.getCol() == item.getCol() && user.getPlayerInv() >= item.getItemSize() && gameMap[user.getRow()][user.getCol()].isHasItem() == true){
                 item.setCollected();
                 user.setPlayerInv(item.getItemSize());
                 user.addItemCollected(item.getItemSize());
                 gameMap[item.getRow()][item.getCol()].itemCollected();
+                System.out.println(gameMap[item.getRow()][item.getCol()].isHasItem());
             }
         }
 
@@ -70,9 +72,13 @@ public class  WorldReader {
         if((user.getItemsCollected().size() -1) > -1) {
             user.setPlayerInv(-user.getItemsCollected().get(user.getItemsCollected().size() - 1));
             user.setItemsCollected();
+            gameMap[user.getRow()][user.getCol()].setHasItem();
+            GasCan item = new GasCan(user.getRow(), user.getCol());
+            item.setItemSize(items.get(items.size() - 1).getItemSize());
+            items.add(item);
+            gameMap[item.getRow()][item.getCol()].setHasItem();
+            System.out.println(gameMap[user.getRow()][user.getCol()].isHasItem());
         }
-
-        if(user.getItemsCollected() != null){gameMap[user.getRow()][user.getCol()].setHasItem();}
 
     }
 
@@ -93,7 +99,9 @@ public class  WorldReader {
                 gameMap[r][c] = t;
             }
         }
-        generateItems();
+        itmAmt = (int) (Math.random()*1)+5;
+        System.out.println(itmAmt);
+        generateItems(itmAmt);
     }
     public int[][] getWorld(){
         StringBuilder part1 = new StringBuilder();
@@ -221,8 +229,7 @@ public class  WorldReader {
         return worldGen;
     }
 
-    public void generateItems(){
-        items = new GasCan[5];
+    public void generateItems(int itmAmt){
         ArrayList<Point> itemPoint = new ArrayList<Point>();
         for(int r = 0; r < gameMap.length; r++){
             for(int c = 0; c < gameMap[0].length; c++){
@@ -232,17 +239,17 @@ public class  WorldReader {
             }
         }
         int itemCreated = 0;
-        while(itemCreated != 5){
+        while(itemCreated != itmAmt){
             int randomItemPoint = (int) (Math.random() * itemPoint.size());
             Point itemPlacement = itemPoint.remove(randomItemPoint);
             int row = (int)(itemPlacement.getX());
             int col = (int)(itemPlacement.getY());
-            items[itemCreated] = new GasCan(row, col);
+            items.add(itemCreated, new GasCan(row, col));
             gameMap[row][col].setHasItem();
             itemCreated++;
         }
     }
-    public GasCan[] getItems(){
+    public ArrayList<GasCan> getItems(){
         return items;
     }
 
