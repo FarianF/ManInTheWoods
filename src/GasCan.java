@@ -7,13 +7,13 @@ public class GasCan {
     private int col;
     private BufferedImage image;
 
-    public int amtOfItems;
+    private boolean isCollected;
 
     public GasCan(int row , int col){
         this.row = row;
         this.col = col;
         image = loadImage("Sprites/Gas (1).png");
-        amtOfItems = 0;
+        isCollected = false;
     }
 
     public int getRow() {
@@ -45,10 +45,11 @@ public class GasCan {
         this.col = col;
     }
 
-    public void addItems(){
-        amtOfItems++;
+    public void setCollected(){
+        isCollected = true;
     }
-    public int getAmtOfItems(){
-        return amtOfItems;
+
+    public boolean isCollected() {
+        return isCollected;
     }
 }

@@ -61,4 +61,8 @@ public class SpriteLoader {
     public void setHasItem(){
         this.hasItem = true;
     }
+
+    public void itemCollected(){
+        this.hasItem = false;
+    }
 }

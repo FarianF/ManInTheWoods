@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-public class WorldReader {
+public class  WorldReader {
     private ArrayList<String> data = new ArrayList<>();
     private SpriteLoader[][] gameMap;
     private Player user;
@@ -55,6 +55,13 @@ public class WorldReader {
                 user.setRow(currentPlayerRow + 1);
             }
         }
+        for(GasCan item : items){
+            if(user.getRow() == item.getRow() && user.getCol() == item.getCol()){
+                item.setCollected();
+                gameMap[item.getRow()][item.getCol()].itemCollected();
+                System.out.println("Collected");
+            }
+        }
 
         }
 
@@ -73,6 +80,7 @@ public class WorldReader {
                 gameMap[r][c] = t;
             }
         }
+        generateItems();
     }
     public int[][] getWorld(){
         StringBuilder part1 = new StringBuilder();
@@ -89,7 +97,6 @@ public class WorldReader {
                         part1.append('S');
                     } else if(random < 25 && count < 5){
                         count++;
-                        System.out.println(count);
                         part1.append('G');
 
 
