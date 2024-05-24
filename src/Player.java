@@ -12,12 +12,15 @@ public class Player {
 
     private ArrayList<Integer> itemsCollected = new ArrayList<Integer>();
 
+    private int chainSawDurability;
+
 
     public Player(int row, int col){
         this.row = row;
         this.col = col;
-        image = loadImage("Sprites/Gas (1).png");
+        image = loadImage("Sprites/CharacterRun.gif");
         playerInv = 20;
+        chainSawDurability = 50;
 
     }
 
@@ -53,6 +56,14 @@ public class Player {
 
     public void setPlayerInv(int itemSize){
         playerInv = playerInv - itemSize;
+    }
+
+    public void useChainSaw(){
+        chainSawDurability -= 5;
+    }
+    public void fuelChainSaw(){
+
+        chainSawDurability++;
     }
     public int getPlayerInv(){
         return playerInv;

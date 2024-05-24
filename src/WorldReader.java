@@ -62,7 +62,6 @@ public class  WorldReader {
                 user.setPlayerInv(item.getItemSize());
                 user.addItemCollected(item.getItemSize());
                 gameMap[item.getRow()][item.getCol()].itemCollected();
-                System.out.println(gameMap[item.getRow()][item.getCol()].isHasItem());
             }
         }
 
@@ -77,7 +76,7 @@ public class  WorldReader {
             item.setItemSize(items.get(items.size() - 1).getItemSize());
             items.add(item);
             gameMap[item.getRow()][item.getCol()].setHasItem();
-            System.out.println(gameMap[user.getRow()][user.getCol()].isHasItem());
+
         }
 
     }
@@ -100,7 +99,6 @@ public class  WorldReader {
             }
         }
         itmAmt = (int) (Math.random()*1)+5;
-        System.out.println(itmAmt);
         generateItems(itmAmt);
     }
     public int[][] getWorld(){

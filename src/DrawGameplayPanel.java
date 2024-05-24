@@ -48,7 +48,7 @@ public class DrawGameplayPanel extends JPanel implements MouseListener, KeyListe
 
                 for(GasCan can : test.getItems()){
                     if(r == can.getRow() && c == can.getCol() && !can.isCollected()){
-                        g.drawImage(can.getImage(), x + 10, y + 10, null);
+                        g.drawImage(can.getImage(), x + 10, y + 2, null);
                     }
                 }
 
