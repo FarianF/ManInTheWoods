@@ -11,6 +11,8 @@ public class SpriteLoader {
 
     private boolean hasItem;
 
+    private boolean enemySpawn;
+
 
     int r;
     int c;
@@ -20,6 +22,7 @@ public class SpriteLoader {
         this.r = r;
         this.c = c;
         this.hasItem = false;
+        this.enemySpawn = false;
     }
 
 
@@ -39,6 +42,9 @@ public class SpriteLoader {
         if(spriteType == 1){
             int treeType = (int) (Math.random()*2)+1;
             image = loadImage("Sprites/TREE" + treeType + ".png");
+        }
+        if(spriteType == 3){
+            image = loadImage("Sprites/000000 (2).png");
         }
 
 
@@ -64,5 +70,9 @@ public class SpriteLoader {
 
     public void itemCollected(){
         this.hasItem = false;
+    }
+
+    public void setEnemySpawn(){
+        this.enemySpawn = true;
     }
 }

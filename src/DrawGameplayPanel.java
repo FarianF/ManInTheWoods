@@ -31,6 +31,9 @@ public class DrawGameplayPanel extends JPanel implements MouseListener, KeyListe
         int playerX = test.getUser().getRow();
         int playerY = test.getUser().getCol();
 
+        int enemyX = test.getBadGuy().getRow();
+        int enemyY = test.getBadGuy().getCol();
+
         super.paintComponent(g);
         for(int r = 0; r < test.getGameMap().length; r++){
             for(int c = 0; c < test.getGameMap()[0].length; c++){
@@ -50,6 +53,11 @@ public class DrawGameplayPanel extends JPanel implements MouseListener, KeyListe
                     if(r == can.getRow() && c == can.getCol() && !can.isCollected()){
                         g.drawImage(can.getImage(), x + 10, y + 2, null);
                     }
+                }
+
+
+                if(r == enemyX && c == enemyY){
+                    g.drawImage(test.getBadGuy().getImage(), x + 10, y + 2, null);
                 }
 
 

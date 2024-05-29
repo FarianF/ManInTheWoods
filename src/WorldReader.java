@@ -16,6 +16,8 @@ public class  WorldReader {
 
     private int itmAmt;
 
+    private VerySpookyScaryMan badGuy;
+
 
 
 
@@ -33,14 +35,21 @@ public class  WorldReader {
 
         if(direction.equals("N")){
             if(currentPlayerRow > 0){
-                if(gameMap[currentPlayerRow -1][currentPlayerColumn].getSpriteType() != 1)
-                user.setRow(currentPlayerRow - 1);
+                if(gameMap[currentPlayerRow - 1][currentPlayerColumn].getSpriteType() != 1) {
+                    user.setRow(currentPlayerRow - 1);
+                } else if(user.getChainSawDurability() != 0){
+                    gameMap[currentPlayerRow - 1][currentPlayerColumn].setSpriteType(3);
+                    user.useChainSaw();
+                }
                 }
             }
         if(direction.equals("E")){
             if(currentPlayerColumn < gameMap[0].length - 1){
                 if (gameMap[currentPlayerRow][currentPlayerColumn + 1].getSpriteType() != 1) {
                     user.setCol(currentPlayerColumn + 1);
+                } else if (user.getChainSawDurability() != 0) {
+                    gameMap[currentPlayerRow][currentPlayerColumn + 1].setSpriteType(3);
+                    user.useChainSaw();
                 }
             }
         }
@@ -48,12 +57,18 @@ public class  WorldReader {
             if(currentPlayerColumn > 0){
                 if(gameMap[currentPlayerRow][currentPlayerColumn - 1].getSpriteType() != 1){
                     user.setCol(currentPlayerColumn - 1);
+                } else if(user.getChainSawDurability() != 0){
+                    gameMap[currentPlayerRow][currentPlayerColumn - 1].setSpriteType(3);
+                    user.useChainSaw();
                 }
             }
         }
         if(direction.equals("S")){
             if(gameMap[currentPlayerRow + 1][currentPlayerColumn].getSpriteType() != 1){
                 user.setRow(currentPlayerRow + 1);
+            } else if (user.getChainSawDurability() != 0) {
+                gameMap[currentPlayerRow +1][currentPlayerColumn].setSpriteType(3);
+                user.useChainSaw();
             }
         }
         for(GasCan item : items){
@@ -69,13 +84,13 @@ public class  WorldReader {
 
     public void dropItem(){
         if((user.getItemsCollected().size() -1) > -1) {
-            user.setPlayerInv(-user.getItemsCollected().get(user.getItemsCollected().size() - 1));
-            user.setItemsCollected();
-            gameMap[user.getRow()][user.getCol()].setHasItem();
             GasCan item = new GasCan(user.getRow(), user.getCol());
             item.setItemSize(items.get(items.size() - 1).getItemSize());
             items.add(item);
             gameMap[item.getRow()][item.getCol()].setHasItem();
+            user.setPlayerInv(-user.getItemsCollected().get(user.getItemsCollected().size() - 1));
+            user.setItemsCollected();
+            gameMap[user.getRow()][user.getCol()].setHasItem();
 
         }
 
@@ -100,6 +115,7 @@ public class  WorldReader {
         }
         itmAmt = (int) (Math.random()*1)+5;
         generateItems(itmAmt);
+        generateEnemies();
     }
     public int[][] getWorld(){
         StringBuilder part1 = new StringBuilder();
@@ -247,6 +263,23 @@ public class  WorldReader {
             itemCreated++;
         }
     }
+
+    public void generateEnemies(){
+        int row = (int) (Math.random()*((fileLength-1)));
+        int col = (int) (Math.random()*(fileSize-1));
+
+        Point enemy = new Point(row, col);
+
+        for(int r = 0; r < gameMap.length; r++){
+            for(int c = 0; c < gameMap[0].length; c++){
+                Point enemyLocation = new Point(r, c);
+                if(enemyLocation.equals(enemy)){
+                    badGuy = new VerySpookyScaryMan(r, c);
+                    gameMap[r][c].setEnemySpawn();
+                }
+            }
+        }
+    }
     public ArrayList<GasCan> getItems(){
         return items;
     }
@@ -260,5 +293,9 @@ public class  WorldReader {
 
     public SpriteLoader[][] getGameMap(){
         return gameMap;
+    }
+
+    public VerySpookyScaryMan getBadGuy(){
+        return badGuy;
     }
 }

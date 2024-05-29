@@ -14,12 +14,15 @@ public class Player {
 
     private int chainSawDurability;
 
+    private int health;
+
 
     public Player(int row, int col){
         this.row = row;
         this.col = col;
         image = loadImage("Sprites/CharacterRun.gif");
         playerInv = 20;
+        health = 100;
         chainSawDurability = 50;
 
     }
@@ -67,6 +70,10 @@ public class Player {
     }
     public int getPlayerInv(){
         return playerInv;
+    }
+
+    public int getChainSawDurability(){
+        return chainSawDurability;
     }
 
     public void addItemCollected(int itemSize){
