@@ -4,18 +4,28 @@ import java.io.File;
 import java.io.IOException;
 public class SpriteLoader {
 
+
     private BufferedImage image;
     private int spriteType;
 
+
     private final String gasCan = "Sprites/Gas (1).png";
 
+
     private boolean hasItem;
+
 
     private boolean enemySpawn;
 
 
+    private boolean hasPlayer;
+
+
+
+
     int r;
     int c;
+
 
     public SpriteLoader(int spriteType, int r, int c) {
         this.setSpriteType(spriteType);
@@ -23,7 +33,12 @@ public class SpriteLoader {
         this.c = c;
         this.hasItem = false;
         this.enemySpawn = false;
+        this.hasPlayer = false;
+
+
     }
+
+
 
 
     public BufferedImage loadImage(String fileName) {
@@ -37,6 +52,7 @@ public class SpriteLoader {
         }
     }
 
+
     public void setSpriteType(int spriteType) {
         this.spriteType = spriteType;
         if(spriteType == 1){
@@ -49,30 +65,50 @@ public class SpriteLoader {
 
 
 
+
+
+
     }
+
+
 
 
     public BufferedImage getImage(){
         return image;
     }
 
+
     public int getSpriteType(){
         return spriteType;
     }
+
 
     public boolean isHasItem() {
         return hasItem;
     }
 
+
     public void setHasItem(){
         this.hasItem = true;
     }
+
 
     public void itemCollected(){
         this.hasItem = false;
     }
 
+
     public void setEnemySpawn(){
         this.enemySpawn = true;
+    }
+
+
+    public boolean isHasPlayer() {
+        return hasPlayer;
+    }
+
+
+    public void setHasPlayer(boolean hasPlayer) {
+        this.hasPlayer = hasPlayer;
     }
 }
