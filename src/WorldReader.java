@@ -97,8 +97,7 @@ public class  WorldReader {
 
 
     public void moveBadGuy(){
-        badGuy.solveMaze();
-        System.out.println("moveBadGuy");
+        badGuy.update();
     }
     public void dropItem(){
         if((user.getItemsCollected().size() -1) > -1) {

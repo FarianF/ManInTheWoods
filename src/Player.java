@@ -49,6 +49,10 @@ public class Player {
         }
     }
 
+    public void takeDamage(){
+        health -= 20;
+    }
+
 
     public int getRow(){
         return row;
