@@ -32,7 +32,7 @@ public class VerySpookyScaryMan {
 
     public void update() {
         if (hasLineOfSight()) {
-            calculatePath();  // Recalculate path if the player is in sight
+            calculatePath();
             move();  // Move based on the new path
         } else if (!path.isEmpty()) {
             move();  // Continue following the last known path if the player is out of sight
@@ -40,6 +40,10 @@ public class VerySpookyScaryMan {
             searchOrPatrol();  // Search or patrol if no path and no line of sight
         }
         checkAndAttackPlayer();  // Check if within attack range to attack
+    }
+
+    private void moveTowardsPlayer(){
+
     }
 
 
@@ -60,6 +64,7 @@ public class VerySpookyScaryMan {
 
 
 
+
     private void checkAndAttackPlayer() {
         if (isAdjacentToPlayer()) {
             user.takeDamage(); // Assuming damage function takes amount as parameter
@@ -68,8 +73,6 @@ public class VerySpookyScaryMan {
 
     private void searchOrPatrol() {
         List<int[]> directions = getWeightedDirectionsTowardsPlayer();
-        Collections.shuffle(directions); // Randomize directions to maintain some unpredictability
-
         for (int[] direction : directions) {
             if (tryMove(direction[0], direction[1])) {
                 break; // Stop if move successful
@@ -119,7 +122,7 @@ public class VerySpookyScaryMan {
             }
 
             // Explore neighbors
-            int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+            int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, 1}, {1, -1}, {-1, -1}};
             for (int[] direction : directions) {
                 int newRow = currentNode.row + direction[0];
                 int newCol = currentNode.col + direction[1];
@@ -137,23 +140,6 @@ public class VerySpookyScaryMan {
     }
 
 
-
-    private void exploreNeighbors(Node currentNode, PriorityQueue<Node> openSet, HashSet<Node> closedSet) {
-        int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        for (int[] direction : directions) {
-            int newRow = currentNode.row + direction[0];
-            int newCol = currentNode.col + direction[1];
-            if (isValid(newRow, newCol) && !closedSet.contains(new Node(newRow, newCol, null, 0, 0))) {
-                Node neighbor = new Node(newRow, newCol, currentNode, currentNode.gCost + 1, estimateHeuristic(newRow, newCol));
-                if (!openSet.contains(neighbor) || currentNode.gCost + 1 < neighbor.gCost) {
-                    neighbor.gCost = currentNode.gCost + 1;
-                    neighbor.fCost = neighbor.gCost + neighbor.hCost;
-                    openSet.add(neighbor);
-                }
-            }
-        }
-    }
-
     private boolean hasLineOfSight() {
         int maxDistance = 10;  // Define the sight distance
         // Directions include right, down, left, up, and the four diagonals
@@ -165,7 +151,7 @@ public class VerySpookyScaryMan {
         for (int[] dir : directions) {
             int checkRow = row;
             int checkCol = col;
-            for (int i = 1; i <= maxDistance; i++) {
+            for (int i = 0; i <= maxDistance; i++) {
                 checkRow += dir[0];
                 checkCol += dir[1];
 
@@ -190,7 +176,7 @@ public class VerySpookyScaryMan {
     }
 
     private boolean isAdjacentToPlayer() {
-        return isAdjacentToPlayer(this.row, this.col);
+        return Math.abs(user.getRow() - row) <= 1 && Math.abs(user.getCol() -col) <= 1;
     }
 
 

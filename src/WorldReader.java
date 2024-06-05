@@ -20,16 +20,15 @@ public class  WorldReader {
 
     private VerySpookyScaryMan badGuy;
 
+    private Objective carEnd;
+
+
     public WorldReader(){
         generateWorld();
     }
-
-
     public Player getUser(){
         return user;
     }
-
-
     public void movePlayer(String direction){
         int currentPlayerRow = user.getRow();
         int currentPlayerColumn = user.getCol();
@@ -92,10 +91,6 @@ public class  WorldReader {
 
 
     }
-
-
-
-
     public void moveBadGuy(){
         badGuy.update();
     }
@@ -114,17 +109,9 @@ public class  WorldReader {
 
 
     }
-
-
     public void inventory(){
         System.out.println(user.getItemsCollected());
     }
-
-
-
-
-
-
     private void generateWorld(){
         int[][] worldData = getWorld();
 
@@ -338,6 +325,23 @@ public class  WorldReader {
                 if(enemyLocation.equals(enemy)){
                     badGuy = new VerySpookyScaryMan(r, c, gameMap, user);
                     gameMap[r][c].setEnemySpawn();
+                }
+            }
+        }
+    }
+
+    public void generateObjective(){
+        int row = (int) (Math.random()*((fileLength-1)));
+        int col = (int) (Math.random()*(fileSize-1));
+
+        Point car = new Point(row, col);
+
+        for(int r = 0; r < gameMap.length; r++){
+            for(int c = 0; c < gameMap[0].length; c++){
+                Point carLocation = new Point(r, c);
+                if(carLocation.equals(car)){
+                    carEnd = new Objective(r, c);
+                    gameMap[r][c].setObjectiveCar(true);
                 }
             }
         }

@@ -17,7 +17,7 @@ public class SpriteLoader {
 
     private boolean enemySpawn;
 
-
+    private boolean objectiveCar;
     private boolean hasPlayer;
 
 
@@ -34,7 +34,7 @@ public class SpriteLoader {
         this.hasItem = false;
         this.enemySpawn = false;
         this.hasPlayer = false;
-
+        this.objectiveCar = false;
 
     }
 
@@ -110,5 +110,13 @@ public class SpriteLoader {
 
     public void setHasPlayer(boolean hasPlayer) {
         this.hasPlayer = hasPlayer;
+    }
+
+    public boolean isObjectiveCar() {
+        return objectiveCar;
+    }
+
+    public void setObjectiveCar(boolean objectiveCar) {
+        this.objectiveCar = objectiveCar;
     }
 }
